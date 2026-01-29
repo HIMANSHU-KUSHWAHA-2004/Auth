@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from supabase_client import supabase
 import hashlib, uuid
+from flask_cors import cross_origin
+
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -9,7 +11,8 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 # ------------------ REGISTER ------------------
-@auth_bp.route("/register", methods=["POST"])
+@auth_bp.route("/register", methods=["POST", "OPTIONS"])
+@cross_origin
 def register():
     data = request.json
     email = data.get("email")
@@ -30,7 +33,8 @@ def register():
     return jsonify({"message": "User registered successfully"}), 201
 
 # ------------------ LOGIN ------------------
-@auth_bp.route("/login", methods=["POST"])
+@auth_bp.route("/login", methods=["POST","OPTIONS"])
+@cross_origin
 def login():
     data = request.json
     email = data.get("email")
