@@ -15,3 +15,8 @@ CORS(app)
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(form_bp, url_prefix="/form")
+
+@app.route("/")
+def home():
+    return {"status": "Backend is running"}, 200
+
