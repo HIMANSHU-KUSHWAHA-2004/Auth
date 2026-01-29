@@ -1,12 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://127.0.0.1:5000",
-});
+const API_URL = "https://auth-backend.onrender.com";
 
-export const registerUser = (data) => API.post("/auth/register", data);
-
-export const loginUser = (data) => API.post("/auth/login", data);
-
-export const submitForm = (data) =>
-  API.post("/form/submit-form", data);
+export const registerUser = (data) => axios.post(`${API_URL}/auth/register`, data);
+export const loginUser = (data) => axios.post(`${API_URL}/auth/login`, data);
+export const submitForm = (data) => axios.post(`${API_URL}/submit`, data);
